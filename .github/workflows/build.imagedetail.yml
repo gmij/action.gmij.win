@@ -17,8 +17,8 @@ jobs:
 
     - name: down Index Json
       run: |
-        curl -o content/dw.gmij.win/index.json  https://raw.githubusercontent.com/gmij/dw.gmij.win/main/preview/index.json
-        curl -o content/dw1.gmij.win/index.json https://raw.githubusercontent.com/gmij/dw1.gmij.win/main/preview/index.json
+        curl  -Lk --create-dirs -o content/dw.gmij.win/index.json  https://raw.githubusercontent.com/gmij/dw.gmij.win/main/preview/index.json
+        curl  -Lk --create-dirs -o content/dw1.gmij.win/index.json https://raw.githubusercontent.com/gmij/dw1.gmij.win/main/preview/index.json
         
     - name: Publish to GitHub Packages
       run: |
