@@ -1,6 +1,8 @@
 name: Build Image Detail(dw.gmij.win)
 on:
-  workflow_dispatch
+  schedule:
+    - cron: '0 */1 * * *' # every 1 hours
+  workflow_dispatch:
   
 jobs:
   build:
