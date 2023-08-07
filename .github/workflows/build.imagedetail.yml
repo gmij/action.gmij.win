@@ -1,4 +1,4 @@
-name: Build Image Detail
+name: Build Image Detail(dw.gmij.win)
 on:
   [push,workflow_dispatch]
   
