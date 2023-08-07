@@ -1,6 +1,6 @@
 name: Build Image Detail(dw.gmij.win)
 on:
-  [push,workflow_dispatch]
+  workflow_dispatch
   
 jobs:
   build:
