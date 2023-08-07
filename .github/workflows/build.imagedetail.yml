@@ -13,6 +13,7 @@ jobs:
           publish
           content
         repository: gmij/wallpaper.robot
+        token: ${{ secrets.PAT }}
 
     - name: down Index Json
       run: |
