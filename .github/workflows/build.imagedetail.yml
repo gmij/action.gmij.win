@@ -1,0 +1,36 @@
+name: Build Image Detail
+on:
+  [push,workflow_dispatch]
+  
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+        
+    - uses: actions/checkout@v3
+      with:
+        sparse-checkout: |
+          publish
+          content
+        repository: gmij/wallpaper.robot
+
+    - name: down Index Json
+      run: |
+        curl -o content/dw.gmij.win/index.json  https://raw.githubusercontent.com/gmij/dw.gmij.win/main/preview/index.json
+        curl -o content/dw1.gmij.win/index.json https://raw.githubusercontent.com/gmij/dw1.gmij.win/main/preview/index.json
+        
+    - name: Publish to GitHub Packages
+      run: |
+        cd publish
+        ./BuildImageDetail ../content/dw.gmij.win/index.json ../content/dw.gmij.win/detail.json
+        ./BuildImageDetail ../content/dw1.gmij.win/index.json ../content/dw1.gmij.win/detail.json
+        
+
+    - name: Commit Changes
+      run: |
+        
+        git config --local user.email "gmij@qq.com"
+        git config --local user.name "Gmij with Github Actions"
+        git add .
+        git diff-index --quiet HEAD || git commit -m "Image Detail"
+        git push -f
