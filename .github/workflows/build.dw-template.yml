@@ -21,6 +21,7 @@ jobs:
       with:
         repository: gmij/dw.template
         path: remote
+        token: ${{ secrets.PAT }}
           
     - name: remove git & copy data
       run: |
