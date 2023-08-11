@@ -28,7 +28,7 @@ jobs:
     - name: Publish to GitHub Packages
       run: |
         cd robot/publish
-        ./BuildImageDetail ../../db/content/dw2.gmij.win/index.json ../../db/content/2dw.gmij.win/detail.json 8
+        ./BuildImageDetail ../../db/content/dw2.gmij.win/index.json ../../db/content/dw2.gmij.win/detail.json 8
         
 
     - name: Commit Changes
