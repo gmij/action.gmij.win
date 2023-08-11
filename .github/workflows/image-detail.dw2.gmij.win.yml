@@ -1,11 +1,15 @@
-name: Build Image Detail(dw2.gmij.win)
+name: Build Image Detail (dw1.gmij.win)
 on:
+
   schedule:
-    - cron: '0 */1 * * *' # every 4 hours
+    - cron: '0 */1 * * *' # every 1 hours
   workflow_dispatch:
+
   
 jobs:
   build:
+    env: 
+      hostName: 'dw2.gmij.win'
     runs-on: ubuntu-latest
     steps:
         
@@ -23,12 +27,12 @@ jobs:
 
     - name: down Index Json
       run: |
-        curl  -Lk --create-dirs -o db/content/dw2.gmij.win/index.json  https://raw.githubusercontent.com/gmij/dw2.gmij.win/main/preview/index.json
+        curl  -Lk --create-dirs -o db/content/${{ env.hostName }}/index.json  https://raw.githubusercontent.com/gmij/${{ env.hostName }}/main/preview/index.json
         
     - name: Publish to GitHub Packages
       run: |
         cd robot/publish
-        ./BuildImageDetail ../../db/content/dw2.gmij.win/index.json ../../db/content/dw2.gmij.win/detail.json 8
+        ./BuildImageDetail ../../db/content/${{ env.hostName }}/index.json ../../db/content/${{ env.hostName }}/detail.json 8
         
 
     - name: Commit Changes
