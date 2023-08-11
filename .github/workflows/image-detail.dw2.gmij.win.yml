@@ -13,15 +13,22 @@ jobs:
       with:
         repository: gmij/wallpaper.robot
         token: ${{ secrets.PAT }}
+        path: robot
+    
+    - uses: actions/checkout@v3
+      with:
+        repository: gmij/wallpaper.db
+        token: ${{ secrets.PAT }}
+        path: db
 
     - name: down Index Json
       run: |
-        curl  -Lk --create-dirs -o content/dw2.gmij.win/index.json  https://raw.githubusercontent.com/gmij/dw2.gmij.win/main/preview/index.json
+        curl  -Lk --create-dirs -o db/content/dw2.gmij.win/index.json  https://raw.githubusercontent.com/gmij/dw2.gmij.win/main/preview/index.json
         
     - name: Publish to GitHub Packages
       run: |
-        cd publish
-        ./BuildImageDetail ../content/dw2.gmij.win/index.json ../content/2dw.gmij.win/detail.json 8
+        cd robot/publish
+        ./BuildImageDetail ../../db/content/dw2.gmij.win/index.json ../../db/content/2dw.gmij.win/detail.json 8
         
 
     - name: Commit Changes
