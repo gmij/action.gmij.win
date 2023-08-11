@@ -19,15 +19,15 @@ jobs:
         repository: gmij/dw.template
         path: remote
           
-    - name: remove git
+    - name: remove git & copy data
       run: |
         cd template
         rm -rf .git
         cp -rf . ../remote
-        cd ../remote
 
     - name: Commit Changes
       run: |
+        cd remote
         ls
         
         git config --local user.email "gmij@qq.com"
