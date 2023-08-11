@@ -33,7 +33,7 @@ jobs:
 
     - name: Commit Changes
       run: |
-        
+        cd db
         git config --local user.email "gmij@qq.com"
         git config --local user.name "Gmij with Github Actions"
         git add .
