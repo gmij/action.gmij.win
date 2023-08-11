@@ -24,7 +24,7 @@ jobs:
         cd template
         rm -rf .git
         cp -rf . ../remote
-        cd remote
+        cd ../remote
 
     - name: Commit Changes
       run: |
