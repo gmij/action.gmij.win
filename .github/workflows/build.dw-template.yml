@@ -1,0 +1,36 @@
+name: Build Template
+on:
+  workflow_dispatch:
+  
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+        
+    - uses: actions/checkout@v3
+      with:
+        repository: gmij/dw.gmij.win
+        sparse-checkout: |
+          .
+          .github/workflows/
+        path: template
+    - uses: actions/checkout@v3
+      with:
+        repository: gmij/dw.template
+        path: remote
+          
+    - name: remove git
+      run: |
+        cd template
+        rm -rf .git
+        cp -rf . ../remote
+        cd remote
+
+    - name: Commit Changes
+      run: |
+        
+        git config --local user.email "gmij@qq.com"
+        git config --local user.name "Gmij with Github Actions"
+        git add .
+        git diff-index --quiet HEAD || git commit -m "Image Detail"
+        git push -f
