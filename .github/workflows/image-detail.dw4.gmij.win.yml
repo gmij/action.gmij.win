@@ -1,0 +1,45 @@
+name: Build Image Detail (dw2.gmij.win)
+on:
+
+  schedule:
+    - cron: '0 */1 * * *' # every 1 hours
+  workflow_dispatch:
+
+  
+jobs:
+  build:
+    env: 
+      hostName: 'dw4.gmij.win'
+    runs-on: ubuntu-latest
+    steps:
+        
+    - uses: actions/checkout@v3
+      with:
+        repository: gmij/wallpaper.robot
+        token: ${{ secrets.PAT }}
+        path: robot
+    
+    - uses: actions/checkout@v3
+      with:
+        repository: gmij/wallpaper.db
+        token: ${{ secrets.PAT }}
+        path: db
+
+    - name: down Index Json
+      run: |
+        curl  -Lk --create-dirs -o db/content/${{ env.hostName }}/index.json  https://raw.githubusercontent.com/gmij/${{ env.hostName }}/main/preview/index.json
+        
+    - name: Publish to GitHub Packages
+      run: |
+        cd robot/publish
+        ./BuildImageDetail ../../db/content/${{ env.hostName }}/index.json ../../db/content/${{ env.hostName }}/detail.json 8
+        
+
+    - name: Commit Changes
+      run: |
+        cd db
+        git config --local user.email "gmij@qq.com"
+        git config --local user.name "Gmij with Github Actions"
+        git add .
+        git diff-index --quiet HEAD || git commit -m "Image Detail"
+        git push -f
