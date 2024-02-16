@@ -1,4 +1,4 @@
-name: Build Image Detail (dw2.gmij.win)
+name: Build Image Detail (dw4.gmij.win)
 on:
 
   schedule:
