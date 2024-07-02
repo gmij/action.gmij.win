@@ -13,13 +13,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
         
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
       with:
         repository: gmij/wallpaper.robot
         token: ${{ secrets.PAT }}
         path: robot
     
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
       with:
         repository: gmij/wallpaper.db
         token: ${{ secrets.PAT }}
