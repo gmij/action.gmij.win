@@ -1,4 +1,4 @@
-name: Build Image Detail (dw5.gmij.win)
+name: Build Image Detail (dw7.gmij.win)
 on:
 
   schedule:
